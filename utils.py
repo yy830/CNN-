@@ -118,7 +118,7 @@ def evaluate_model_cnn(model, X_test, y_test):
     report = classification_report(y_test, preds, output_dict=True)
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-    plt.title('CNN模型混淆矩阵')
-    plt.xlabel('预测标签')
-    plt.ylabel('真实标签')
+    plt.title('CNN model confusion matrix')
+    plt.xlabel('Tag Estimation')
+    plt.ylabel('True label')
     return fig,report
