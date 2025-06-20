@@ -24,7 +24,7 @@ st.sidebar.success("传统模型已加载")
 
 # 加载 CNN 模型
 try:
-    cnn_model = load_cnn_model("C:/Users/daiyan/Desktop/Stu/AI_design/cnn_model.pth")
+    cnn_model = load_cnn_model("cnn_model.pth")
     if cnn_model is not None:
         st.sidebar.success("CNN 模型已加载")
     else:
