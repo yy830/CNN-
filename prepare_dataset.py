@@ -2,7 +2,7 @@ import os
 import librosa
 import numpy as np
 
-DATASET_PATH = "C:/Users/daiyan/Desktop/Stu/AI_design/free-spoken-digit-dataset-master/recordings"
+DATASET_PATH = "free-spoken-digit-dataset-master.zip/recordings"
 
 def prepare_dataset():
     X, y = [], []
