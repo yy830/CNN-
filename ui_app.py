@@ -40,7 +40,27 @@ if uploaded_file is not None:
     y, sr = load_audio(uploaded_file)
     st.write("采样率:", sr)
 
-    # 2. 可视化
+    # 2. 识别
+    try:
+        if model_type == "传统模型":
+            prediction = predict_digit(model, mfcc)
+            st.subheader("🌟 识别结果（传统模型）")
+            st.write(f"📢 模型预测的数字是：**{prediction}**")
+        else:
+            if cnn_model is None:
+                st.error("CNN 模型未正确加载，请检查模型文件")
+            else:
+                mfcc_tensor = preprocess_audio_for_cnn(y, sr)
+                cnn_prediction = predict_digit_cnn(cnn_model, mfcc_tensor)
+                st.subheader("🌟 识别结果（CNN 模型）")
+                st.write(f"📢 模型预测的数字是：**{cnn_prediction}**")
+    except Exception as e:
+        st.error(f"预测过程出错：{str(e)}")
+        st.error("详细错误信息：")
+        st.exception(e)
+
+    
+    # 3. 可视化
     st.subheader("⏱️ 原始波形（时域）")
     plot_waveform(y, sr)
 
@@ -60,28 +80,6 @@ if uploaded_file is not None:
         except Exception as e:
             st.error(f"生成3D频谱图时出错：{str(e)}")
             st.exception(e)
-
-
-    # 3. 识别
-    try:
-        if model_type == "传统模型":
-            prediction = predict_digit(model, mfcc)
-            st.subheader("🌟 识别结果（传统模型）")
-            st.write(f"📢 模型预测的数字是：**{prediction}**")
-        else:
-            if cnn_model is None:
-                st.error("CNN 模型未正确加载，请检查模型文件")
-            else:
-                mfcc_tensor = preprocess_audio_for_cnn(y, sr)
-                cnn_prediction = predict_digit_cnn(cnn_model, mfcc_tensor)
-                st.subheader("🌟 识别结果（CNN 模型）")
-                st.write(f"📢 模型预测的数字是：**{cnn_prediction}**")
-    except Exception as e:
-        st.error(f"预测过程出错：{str(e)}")
-        st.error("详细错误信息：")
-        st.exception(e)
-
-   
 
 if st.sidebar.button("📊 评估CNN模型"):
     st.subheader("CNN模型评估")
@@ -124,5 +122,6 @@ if st.sidebar.button("📊 评估传统模型"):
         st.error(f"模型评估出错: {str(e)}")
         st.exception(e)
 
-#cd C:\Users\daiyan\Desktop\Stu\AI_design
+#终端运行
+#cd 路径
 #streamlit run ui_app.py
