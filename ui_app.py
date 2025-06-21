@@ -36,10 +36,10 @@ except Exception as e:
 uploaded_file = st.file_uploader("📤 上传一个 .wav 文件", type="wav")
 
 if uploaded_file is not None:
-    # 1. 加载音频
+    # 1. 加载音频、模型
     y, sr = load_audio(uploaded_file)
     st.write("采样率:", sr)
-
+    mfcc = extract_mfcc(y, sr)
     # 2. 识别
     try:
         if model_type == "传统模型":
@@ -64,7 +64,7 @@ if uploaded_file is not None:
     st.subheader("⏱️ 原始波形（时域）")
     plot_waveform(y, sr)
 
-    mfcc = extract_mfcc(y, sr)
+    
     st.markdown("### 🧠 MFCC 特征图（感知域）")
     plot_mfcc(y, sr)
 
