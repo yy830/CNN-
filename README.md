@@ -20,7 +20,7 @@ CNN-
 ├── utils/                    # 数据处理与特征提取工具函数  
 │   └── feature_extraction.py  
 ├── cnn_model.py              # CNN模型结构定义  
-├── svm_model.py              # SVM模型训练与预测  
+├── model.py              # SVM模型训练与预测  
 ├── train.py                  # CNN模型训练脚本  
 ├── evaluate.py               # 模型评估与混淆矩阵分析  
 ├── ui_app.py                 # Streamlit前端入口  
